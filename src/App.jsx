@@ -13,6 +13,16 @@ export default function App() {
 function Headers(){
   const [IPaddress, setIPaddress] = useState("");
   const [ipApi, setIpApi] = useState(null);
+
+  useEffect(() => {
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        setIpApi(data);
+        setIPaddress(data.ip);
+      })
+      .catch(err => console.error("Error fetching user IP:", err));
+  }, []);
   
   
   function handleSubmit(e) {
