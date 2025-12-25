@@ -43,11 +43,11 @@ function Headers(){
         </div>
         <div className='info'>
           <p>LOCATION</p>
-          <p>{ipApi?.country_name || 'N/A'}</p>
+          <p>{ipApi?.country_name || 'N/A'}, {ipApi?.city || 'N/A'}</p>
         </div>
         <div className='info'>
           <p>TIMEZONE</p>
-          <p>{ipApi?.utc_offset || 'N/A'}</p>
+          <p>UTC{ipApi?.utc_offset || 'N/A'}</p>
         </div>
         <div className='info'>
           <p>ISP</p>
