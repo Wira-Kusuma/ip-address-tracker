@@ -11,8 +11,8 @@ export default function App() {
 }
 
 function Headers(){
-  const [IPaddress, setIPaddress] = useState();
-  const [ipApi, setIpApi] = useState();
+  const [IPaddress, setIPaddress] = useState("");
+  const [ipApi, setIpApi] = useState(null);
   
   
   function handleSubmit(e) {
@@ -25,7 +25,6 @@ function Headers(){
         .then(res => res.json())
         .then(data => setIpApi(data))
         .catch(err => console.error("Error fetching IP data:", err));
-        console.log(ipApi);
   }
   return(
     <header>
@@ -40,19 +39,19 @@ function Headers(){
       <div className='infoWrap'>
         <div className='info'>
           <p>IP ADDRESS</p>
-          <p>123.123.12.123</p>
+          <p>{ipApi?.ip || 'N/A'}</p>
         </div>
         <div className='info'>
           <p>LOCATION</p>
-          <p>Indonesia</p>
+          <p>{ipApi?.country_name || 'N/A'}</p>
         </div>
         <div className='info'>
           <p>TIMEZONE</p>
-          <p>+7 GMT</p>
+          <p>{ipApi?.utc_offset || 'N/A'}</p>
         </div>
         <div className='info'>
           <p>ISP</p>
-          <p>indiHome</p>
+          <p>{ipApi?.org || 'N/A'}</p>
         </div>
       </div>
     </header>
