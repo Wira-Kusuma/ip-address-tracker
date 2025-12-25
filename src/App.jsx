@@ -47,7 +47,7 @@ function Headers(){
         </div>
         <div className='info'>
           <p>TIMEZONE</p>
-          <p>UTC{ipApi?.utc_offset || 'N/A'}</p>
+          <p>UTC{ipApi?.utc_offset || ' +N/A'}</p>
         </div>
         <div className='info'>
           <p>ISP</p>
