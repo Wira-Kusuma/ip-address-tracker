@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './index.css'
+import { useEffect } from 'react';
 
 export default function App() {
   return(
@@ -10,14 +11,21 @@ export default function App() {
 }
 
 function Headers(){
-  const [IPaddress, setIPaddress] = useState()
+  const [IPaddress, setIPaddress] = useState();
+  const [ipApi, setIpApi] = useState();
+  
+  
   function handleSubmit(e) {
     e.preventDefault();
     if(IPaddress === "" || !/^\d+\.\d+\.\d+\.\d+$/.test(IPaddress)) {
       alert("Please enter a valid IP address format");
       return;
     }
-    alert(IPaddress)
+    fetch(`https://ipapi.co/${IPaddress}/json/`)
+        .then(res => res.json())
+        .then(data => setIpApi(data))
+        .catch(err => console.error("Error fetching IP data:", err));
+        console.log(ipApi);
   }
   return(
     <header>
