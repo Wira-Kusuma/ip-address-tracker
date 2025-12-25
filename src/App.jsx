@@ -13,8 +13,8 @@ function Headers(){
   const [IPaddress, setIPaddress] = useState()
   function handleSubmit(e) {
     e.preventDefault();
-    if(IPaddress === "") {
-      alert("do not blank");
+    if(IPaddress === "" || !/^\d+\.\d+\.\d+\.\d+$/.test(IPaddress)) {
+      alert("Please enter a valid IP address format");
       return;
     }
     alert(IPaddress)
@@ -32,7 +32,7 @@ function Headers(){
       <div className='infoWrap'>
         <div className='info'>
           <p>IP ADDRESS</p>
-          <p>123.123.23.123</p>
+          <p>123.123.12.123</p>
         </div>
         <div className='info'>
           <p>LOCATION</p>
