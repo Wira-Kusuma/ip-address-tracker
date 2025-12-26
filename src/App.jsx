@@ -3,7 +3,7 @@ import './index.css'
 import { useEffect } from 'react';
 
 export default function App() {
-  const [IPaddress, setIPaddress] = useState("");
+  const [IPaddress, setIPaddress] = useState("8.8.8.8");
   const [ipApi, setIpApi] = useState(null);
 
   useEffect(() => {
