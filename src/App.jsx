@@ -31,8 +31,12 @@ export default function App() {
 
   return(
     <main>
-      <Headers ipApi={ipApi} handleSubmit={handleSubmit} IPaddress={IPaddress} setIPaddress={setIPaddress}/>
+      <Headers ipApi={ipApi}
+      handleSubmit={handleSubmit}
+      IPaddress={IPaddress}
+      setIPaddress={setIPaddress}/>
       <Map ipApi={ipApi}/>
+      <Footer />
     </main>
   )
 }
@@ -84,5 +88,14 @@ function Map({ipApi}){
       )}
     </>
     
+  )
+}
+
+function Footer(){
+  return(
+    <footer>
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="https://github.com/Wira-Kusuma/ip-address-tracker">Wira Kusuma Phandawa</a>.
+    </footer>
   )
 }
