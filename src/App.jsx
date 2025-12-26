@@ -3,14 +3,6 @@ import './index.css'
 import { useEffect } from 'react';
 
 export default function App() {
-  return(
-    <main>
-      <Headers />
-    </main>
-  )
-}
-
-function Headers(){
   const [IPaddress, setIPaddress] = useState("");
   const [ipApi, setIpApi] = useState(null);
 
@@ -23,8 +15,7 @@ function Headers(){
       })
       .catch(err => console.error("Error fetching user IP:", err));
   }, []);
-  
-  
+
   function handleSubmit(e) {
     e.preventDefault();
     if(IPaddress === "" || !/^\d+\.\d+\.\d+\.\d+$/.test(IPaddress)) {
@@ -36,6 +27,17 @@ function Headers(){
         .then(data => setIpApi(data))
         .catch(err => console.error("Error fetching IP data:", err));
   }
+
+
+  return(
+    <main>
+      <Headers ipApi={ipApi} handleSubmit={handleSubmit} IPaddress={IPaddress} setIPaddress={setIPaddress}/>
+      <Map ipApi={ipApi}/>
+    </main>
+  )
+}
+
+function Headers({ipApi, handleSubmit, IPaddress, setIPaddress}){
   return(
     <header>
       <h1>IP Address Tracker</h1>
@@ -64,6 +66,23 @@ function Headers(){
           <p>{ipApi?.org || 'N/A'}</p>
         </div>
       </div>
+
     </header>
   );
+}
+
+function Map({ipApi}){
+  return(
+    <>
+    {ipApi && (
+        <div className='map'>
+          <iframe
+            src={`https://www.google.com/maps?q=${ipApi.latitude},${ipApi.longitude}&z=15&output=embed`}
+            allowFullScreen
+          />
+        </div>
+      )}
+    </>
+    
+  )
 }
