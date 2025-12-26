@@ -12,7 +12,7 @@
 
 body {
   width: 100%;
-  background-image: url(images/pattern-bg-desktop.png);
+  background-image: url(/images/pattern-bg-desktop.png);
   background-size:contain;
   background-repeat: no-repeat;
 }
@@ -141,7 +141,7 @@ button>img{
   }
 
   body {
-    background-image: url(images/pattern-bg-mobile.png);
+    background-image: url(/images/pattern-bg-mobile.png);
   }
 
   h1{
