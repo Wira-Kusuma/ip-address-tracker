@@ -3,8 +3,9 @@ import './index.css'
 import { useEffect } from 'react';
 
 export default function App() {
-  const [IPaddress, setIPaddress] = useState("8.8.8.8");
+  const [IPaddress, setIPaddress] = useState("");
   const [ipApi, setIpApi] = useState(null);
+  const [error, setError] = useState();
 
   useEffect(() => {
     fetch('https://ipapi.co/json/')
@@ -13,8 +14,13 @@ export default function App() {
         setIpApi(data);
         setIPaddress(data.ip);
       })
-      .catch(err => console.error("Error fetching user IP:", err));
+      .catch(err => setError(err));
   }, []);
+
+  useEffect(()=> {
+    alert("error fetching / use limit" ,error);
+    console.error(error);
+  },[error])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -25,16 +31,18 @@ export default function App() {
     fetch(`https://ipapi.co/${IPaddress}/json/`)
         .then(res => res.json())
         .then(data => setIpApi(data))
-        .catch(err => console.error("Error fetching IP data:", err));
+        .catch(err => setError(err));
   }
 
 
   return(
     <main>
-      <Headers ipApi={ipApi}
+      <Headers 
+      ipApi={ipApi}
       handleSubmit={handleSubmit}
       IPaddress={IPaddress}
-      setIPaddress={setIPaddress}/>
+      setIPaddress={setIPaddress}
+      />
       <Map ipApi={ipApi}/>
       <Footer />
     </main>
@@ -55,19 +63,19 @@ function Headers({ipApi, handleSubmit, IPaddress, setIPaddress}){
       <div className='infoWrap'>
         <div className='info'>
           <p>IP ADDRESS</p>
-          <p>{ipApi?.ip || 'N/A'}</p>
+          <p>{ipApi?.ip || 'Loading...'}</p>
         </div>
         <div className='info'>
           <p>LOCATION</p>
-          <p>{ipApi?.country_name || 'N/A'}, {ipApi?.city || 'N/A'}</p>
+          <p>{ipApi?.country_name || 'Loading...'}, {ipApi?.city || 'Loading...'}</p>
         </div>
         <div className='info'>
           <p>TIMEZONE</p>
-          <p>UTC{ipApi?.utc_offset || ' +N/A'}</p>
+          <p>UTC{ipApi?.utc_offset || 'Loading...'}</p>
         </div>
         <div className='info'>
           <p>ISP</p>
-          <p>{ipApi?.org || 'N/A'}</p>
+          <p>{ipApi?.org || 'Loading...'}</p>
         </div>
       </div>
 
